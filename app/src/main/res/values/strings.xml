@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidOpenGLESDemo</string>
+
+    <string name="sample_1_draw_triangle">案例一: GlSurfaceView绘制三角形</string>
+</resources>
