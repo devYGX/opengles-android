@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidopenglesdemo.R;
-import com.example.androidopenglesdemo.sample1.shape.Triangle;
+import com.example.androidopenglesdemo.glrendershape.impls.Triangle;
 
 public class OpenglesHelloWorldActivity extends AppCompatActivity {
 

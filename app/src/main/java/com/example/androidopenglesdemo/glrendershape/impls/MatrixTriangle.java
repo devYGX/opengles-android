@@ -1,27 +1,35 @@
-package com.example.androidopenglesdemo.sample1.shape;
+package com.example.androidopenglesdemo.glrendershape.impls;
 
 import android.content.Context;
 import android.opengl.GLES20;
+import android.opengl.Matrix;
+import android.util.Log;
 
-import com.example.androidopenglesdemo.sample1.ShapeRender;
+import com.example.androidopenglesdemo.constants.Matrixs;
+import com.example.androidopenglesdemo.glrendershape.ShapeRender;
 import com.example.androidopenglesdemo.utils.GLESUtils;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.Arrays;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-public class Triangle extends ShapeRender {
+/**
+ * 使用了矩阵的三角形渲染器
+ */
+public class MatrixTriangle extends ShapeRender {
 
     private FloatBuffer mColorFloatBuffer;
     private FloatBuffer mVertexCoorBuffer;
     private int glProgram;
     private int vPosition;
     private int vColor;
+    private int vMatrix;
 
-    public Triangle(Context context) {
+    public MatrixTriangle(Context context) {
         super(context);
 
     }
@@ -31,8 +39,8 @@ public class Triangle extends ShapeRender {
         initBuffer();
 
         glProgram = GLESUtils.createGlProgram(getContext(),
-                "sample1/vertex/shape_triangle.glsl",
-                "sample1/fragment/shape_triangle.glsl");
+                "sample2/vertex/shape_matrix_triangle.glsl",
+                "sample2/fragment/shape_matrix_triangle.glsl");
 
         // 找到vertex/shape_triangle.glsl中编写的 attribute vec4 vPosition 句柄;
         // 后续绘制时将通过此句柄将三角形顶点坐标传递给glsl程序
@@ -41,19 +49,14 @@ public class Triangle extends ShapeRender {
         // 找到fragment/shape_triangle.glsl中编写的 uniform vec4 vColor 句柄
         // 后续绘制时将通过此句柄将颜色传递给glsl程序
         vColor = GLES20.glGetUniformLocation(glProgram, "vColor");
-    }
-
-    @Override
-    public void onSurfaceChanged(GL10 gl, final int width, final int height) {
-
-        GLES20.glViewport(0, 0, width, height);
+        vMatrix = GLES20.glGetUniformLocation(glProgram, "vMatrix");
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
 
         // 清屏
-        GLES20.glClearColor(0, 0, 0, 0);
+        GLES20.glClearColor(1, 1, 1, 1);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
         // 使用程式
@@ -61,6 +64,7 @@ public class Triangle extends ShapeRender {
 
         // 将颜色传给glsl vColor句柄
         GLES20.glUniform4fv(vColor, 1, mColorFloatBuffer);
+        GLES20.glUniformMatrix4fv(vMatrix, 1, false, getMatrixValue(), 0);
 
         // 传入顶点坐标
         GLES20.glEnableVertexAttribArray(vPosition);
@@ -81,9 +85,9 @@ public class Triangle extends ShapeRender {
                 .position(0);
 
         float[] vertexCoor = new float[]{
-                0.0F, 1.0F, 0.0F, 3.0F,
-                -1.0F, -1.0F, 0.0F, 3.0F,
-                1.0F, -1.0F, 0.0F, 3.0F,
+                0.0F, 1.0F, 0.0F, 1.0F,
+                -0.5F, 0F, 0.0F, 1.0F,
+                0.5F, 0F, 0.0F, 1.0F,
         };
         mVertexCoorBuffer = (FloatBuffer) ByteBuffer.allocateDirect(vertexCoor.length * 4)
                 .order(ByteOrder.nativeOrder())

@@ -3,6 +3,7 @@ package com.example.androidopenglesdemo.viewholders;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,7 +23,7 @@ public class SampleHolder extends RecyclerView.ViewHolder {
         onViewCreated(itemView);
     }
 
-    private void onViewCreated(View view){
+    private void onViewCreated(View view) {
         tvTitle = view.findViewById(R.id.tvTitle);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,12 +34,15 @@ public class SampleHolder extends RecyclerView.ViewHolder {
                 }
                 Class<? extends Activity> targetActivity = sample.getTargetActivity();
                 Context context = v.getContext();
-                context.startActivity(new Intent(context, targetActivity));
+                Intent intent = new Intent(context, targetActivity);
+                Bundle bundle = sample.getBundle();
+                if (bundle != null) intent.putExtra("bundle", bundle);
+                context.startActivity(intent);
             }
         });
     }
 
-    public void bindHolder(OpenglesSample sample){
+    public void bindHolder(OpenglesSample sample) {
         this.sample = sample;
         tvTitle.setText(sample.getTitle());
     }
