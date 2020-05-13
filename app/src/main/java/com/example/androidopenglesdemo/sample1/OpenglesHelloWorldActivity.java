@@ -1,11 +1,12 @@
 package com.example.androidopenglesdemo.sample1;
 
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidopenglesdemo.R;
+import com.example.androidopenglesdemo.glenv.GLSurfaceView;
+import com.example.androidopenglesdemo.glrendershape.impls.MatrixTriangle;
 import com.example.androidopenglesdemo.glrendershape.impls.Triangle;
 
 public class OpenglesHelloWorldActivity extends AppCompatActivity {
@@ -19,7 +20,7 @@ public class OpenglesHelloWorldActivity extends AppCompatActivity {
 
         glSurfaceView = findViewById(R.id.glSurfaceView);
         glSurfaceView.setEGLContextClientVersion(2);
-        glSurfaceView.setRenderer(new Triangle(getApplicationContext()));
+        glSurfaceView.setRenderer(new MatrixTriangle(getApplicationContext()));
         glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
 

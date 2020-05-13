@@ -3,4 +3,6 @@
 
     <string name="sample_1_draw_triangle">案例一: GlSurfaceView绘制三角形</string>
     <string name="sample_2_draw_shape">案例二: GlSurfaceView绘制二维图形</string>
+    <string name="sample_3_GlSurfaceView">案例三: GlSurfaceView源码</string>
+    <string name="sample_4_CameraOpengles">案例三: Opengles和Camera相结合</string>
 </resources>

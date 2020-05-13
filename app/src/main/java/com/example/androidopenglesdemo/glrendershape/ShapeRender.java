@@ -46,7 +46,7 @@ public abstract class ShapeRender implements GLSurfaceView.Renderer {
         // 设置相机视角
         // eyeX, eyeY, eyeZ表示相机的坐标点, 这里传入的是0,0,5, 表示相机处于图形Z轴正上面
         // upX, upY, upZ表示的是相机的朝向; 设置upZ不为0时, 将看不到图像效果;
-        Matrix.setLookAtM(setLookAtM, 0, 0, 0, 4, 0, 0, 0, 0, 1, 0);
+        Matrix.setLookAtM(setLookAtM, 0, 0, 0, 6, 0, 0, 0, 0, 1, 0);
         Matrix.multiplyMM(multiplyResult, 0, frustumM, 0, setLookAtM, 0);
 
         Matrix.multiplyMM(mMatrixValue, 0, multiplyResult, 0, Matrixs.ORIGINAL, 0);

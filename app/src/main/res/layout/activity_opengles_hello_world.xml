@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".sample1.OpenglesHelloWorldActivity">
 
-    <android.opengl.GLSurfaceView
+    <com.example.androidopenglesdemo.glenv.GLSurfaceView
         android:id="@+id/glSurfaceView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

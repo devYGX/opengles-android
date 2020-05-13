@@ -10,7 +10,9 @@ import android.view.View;
 import com.example.androidopenglesdemo.activities.ContainerActivity;
 import com.example.androidopenglesdemo.adapters.SampleAdapter;
 import com.example.androidopenglesdemo.bean.OpenglesSample;
+import com.example.androidopenglesdemo.fragments.CameraFragment;
 import com.example.androidopenglesdemo.fragments.GlRendererShapeFragment;
+import com.example.androidopenglesdemo.fragments.OpenglesEnvFragment;
 import com.example.androidopenglesdemo.sample1.OpenglesHelloWorldActivity;
 
 import java.util.ArrayList;
@@ -37,5 +39,11 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("fragmentClassName", GlRendererShapeFragment.class.getName());
         openglesSamples.add(new OpenglesSample(getString(R.string.sample_2_draw_shape), ContainerActivity.class, bundle));
+        bundle = new Bundle();
+        bundle.putString("fragmentClassName", OpenglesEnvFragment.class.getName());
+        openglesSamples.add(new OpenglesSample(getString(R.string.sample_3_GlSurfaceView), ContainerActivity.class, bundle));
+        bundle = new Bundle();
+        bundle.putString("fragmentClassName", CameraFragment.class.getName());
+        openglesSamples.add(new OpenglesSample(getString(R.string.sample_4_CameraOpengles), ContainerActivity.class, bundle));
     }
 }
