@@ -30,11 +30,15 @@ public class CameraRenderer extends GlesRenderer {
     private boolean enableFrameExport;
     private boolean frameExportConfigChanged;
     private IFrameExportCallback takePicFrameExportCallback;
-    private IFrameExportCallback callback1;
 
-    public CameraRenderer(Context context, int width, int height, ISurfaceTextureListener iSurfaceTextureListener) {
+    public CameraRenderer(Context context,
+                          int width,
+                          int height,
+                          int degree,
+                          boolean mirror,
+                          ISurfaceTextureListener iSurfaceTextureListener) {
         super(context, width, height);
-        effectRenderer = new EffectRenderer(context, width, height, iSurfaceTextureListener);
+        effectRenderer = new EffectRenderer(context, width, height, degree, mirror, iSurfaceTextureListener);
         displayRenderer = new DisplayRenderer(context);
 
         glesFrameExporter = new GlesFrameExporter(context);

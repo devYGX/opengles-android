@@ -56,8 +56,11 @@ public class CameraImpl implements ICamera {
             = new Camera.PreviewCallback() {
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
-            previewCallback.onPreviewFrame(data, previewSize.width, previewSize.height, degree, cameraId);
-            camera.addCallbackBuffer(callbackBuffer);
+            PreviewCallback previewCallback = CameraImpl.this.previewCallback;
+            if(previewCallback != null) {
+                previewCallback.onPreviewFrame(data, previewSize.width, previewSize.height, degree, cameraId);
+                camera.addCallbackBuffer(callbackBuffer);
+            }
         }
     };
 

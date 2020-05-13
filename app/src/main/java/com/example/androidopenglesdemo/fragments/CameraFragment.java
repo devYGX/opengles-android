@@ -48,7 +48,7 @@ public class CameraFragment extends Fragment implements TextureView.SurfaceTextu
         manager.init(getContext());
         manager.start();
         manager.registerPreviewCallback(mPreviewCallback);
-        manager.registerFrameExportCallback(this);
+        // manager.registerFrameExportCallback(this);
     }
 
     private PreviewCallback mPreviewCallback = new PreviewCallback() {

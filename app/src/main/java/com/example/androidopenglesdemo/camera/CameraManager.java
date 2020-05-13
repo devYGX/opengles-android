@@ -9,6 +9,7 @@ import android.util.SparseArray;
 
 import androidx.collection.ArrayMap;
 
+import com.example.androidopenglesdemo.camera.filterimpl.BeautyFilter;
 import com.example.androidopenglesdemo.camera.filterimpl.GrayFilter;
 import com.example.androidopenglesdemo.glenv.OpenglesEnv;
 
@@ -142,14 +143,15 @@ public class CameraManager {
     private void initCamera() {
         if (iCamera == null) {
             iCamera = CameraFactory.newCamera(context);
-            iCamera.open(0);
+            iCamera.open(1);
             cameraInfo = iCamera.getCameraInfo();
             previewSize = (int[]) cameraInfo.get(ICamera.PARAM_PREVIEW_SIZE);
+            int degree = (int) cameraInfo.get(ICamera.PARAM_DEGREE);
             openglesEnv = new OpenglesEnv();
             openglesEnv.initEnv();
-            renderer = new CameraRenderer(context, previewSize[0], previewSize[1], mEffectListener);
+            renderer = new CameraRenderer(context, previewSize[0], previewSize[1], degree, false, mEffectListener);
             openglesEnv.setRenderer(renderer);
-            renderer.addFilter(new GrayFilter(context));
+            renderer.addFilter(new BeautyFilter(context));
             CameraDisplayWindow nativeWindow = this.nativeWindow;
             if (nativeWindow != null) {
                 openglesEnv.setDisplaySurface(

@@ -20,6 +20,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class EffectRenderer extends GlesRenderer implements IOutputFilter {
     private static final String TAG = "EffectRenderer";
+    private final int degree;
+    private final boolean mirror;
     private ISurfaceTextureListener listener;
 
     private SurfaceTexture surfaceTexture;
@@ -46,9 +48,16 @@ public class EffectRenderer extends GlesRenderer implements IOutputFilter {
     private FloatBuffer mVertexBuffer;
     private FloatBuffer mTextureBuffer;
 
-    public EffectRenderer(Context context, int width, int height, ISurfaceTextureListener listener) {
+    public EffectRenderer(Context context,
+                          int width,
+                          int height,
+                          int degree,
+                          boolean mirror,
+                          ISurfaceTextureListener listener) {
         super(context, width, height);
         this.listener = listener;
+        this.degree = degree;
+        this.mirror = mirror;
         initBuffer();
     }
 
@@ -65,7 +74,8 @@ public class EffectRenderer extends GlesRenderer implements IOutputFilter {
                 .put(TEXTURE)
                 .position(0);
 
-        Matrix.scaleM(mMatrix, 0, Matrixs.ORIGINAL, 0, 1, -1, 1);
+        Matrix.rotateM(mMatrix, 0, Matrixs.ORIGINAL, 0, degree, 0, 0, 1);
+        Matrix.scaleM(mMatrix, 0, mirror ? -1 : 1, -1, 1);
     }
 
     @Override
